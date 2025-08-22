@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthik S Gowda - Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a0a0a',
+                        secondary: '#1a1a1a',
+                        accent: '#3b82f6',
+                        'accent-purple': '#8b5cf6',
+                        'text-primary': '#f8fafc',
+                        'text-secondary': '#94a3b8',
+                        success: '#10b981'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        'fade-in-left': 'fadeInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        'fade-in-right': 'fadeInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        'scale-in': 'scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .skill-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+        }
+        
+        .section-visible {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-primary text-text-primary font-inter overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-primary/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h2 class="text-xl font-bold gradient-text">KSG</h2>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#skills" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="#experience" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Experience</a>
+                        <a href="#projects" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="#education" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Education</a>
+                        <a href="#contact" class="nav-link text-text-secondary hover:text-accent px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgo8cGF0aCBkPSJtIDQwIDAgbCAwIDQwIG0gLTQwIC00MCBsIDQwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIxIi8+CjwvcGF0dGVybj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+Cjwvc3ZnPg==')] opacity-20"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-fade-in-up">
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
+                    <span class="block">Hello, I'm</span>
+                    <span class="gradient-text">Karthik S Gowda</span>
+                </h1>
+                <p class="text-xl sm:text-2xl text-text-secondary mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Full Stack Developer & Problem Solver
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="flex items-center space-x-2 text-text-secondary">
+                        <i class="fas fa-envelope"></i>
+                        <span>karthiksgowda28@gmail.com</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-text-secondary">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 80508 28798</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center space-x-6 mb-12 animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <a href="https://linkedin.com/in/karthisg" target="_blank" class="text-2xl text-text-secondary hover:text-accent transition-all duration-300 hover:scale-110">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Karthisgowda" target="_blank" class="text-2xl text-text-secondary hover:text-accent transition-all duration-300 hover:scale-110">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <div class="text-2xl text-text-secondary">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="ml-2 text-sm">Bangalore, India</span>
+                    </div>
+                </div>
+                <div class="animate-float">
+                    <a href="#about" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-full hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-pulse-glow">
+                        Explore My Work
+                        <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Professional Summary</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-8 card-hover border border-gray-800">
+                    <p class="text-lg leading-relaxed text-text-secondary text-center">
+                        BCA student with hands-on experience in <span class="text-accent font-semibold">full-stack web</span> and <span class="text-accent font-semibold">Android development</span>. 
+                        Skilled in JavaScript, Python, and backend integration, with a strong focus on <span class="text-accent-purple font-semibold">user-centric design</span>. 
+                        A quick learner and team player, passionate about building efficient and impactful technology solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Technical Skills</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+            </div>
+            
+            <!-- Languages -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 text-center text-text-primary">Languages & Core Technologies</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fas fa-code text-4xl text-accent mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">DSA</h4>
+                            <p class="text-text-secondary">Data Structures & Algorithms</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-python text-4xl text-accent-purple mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Python</h4>
+                            <p class="text-text-secondary">Backend Development & Scripting</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-android text-4xl text-success mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Android Studio</h4>
+                            <p class="text-text-secondary">Mobile App Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web/Mobile -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 text-center text-text-primary">Web & Mobile Technologies</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-html5 text-4xl text-orange-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">HTML</h4>
+                            <p class="text-text-secondary">Semantic Markup</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-css3-alt text-4xl text-blue-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">CSS</h4>
+                            <p class="text-text-secondary">Modern Styling</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-js-square text-4xl text-yellow-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">JavaScript</h4>
+                            <p class="text-text-secondary">Dynamic Interactions</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-react text-4xl text-cyan-500 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">React</h4>
+                            <p class="text-text-secondary">Component-Based UI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Databases & Tools -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-8 text-center text-text-primary">Databases & Development Tools</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fas fa-database text-4xl text-accent mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">MySQL</h4>
+                            <p class="text-text-secondary">Relational Database</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fas fa-leaf text-4xl text-success mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">MongoDB</h4>
+                            <p class="text-text-secondary">NoSQL Database</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fab fa-git-alt text-4xl text-orange-600 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Git</h4>
+                            <p class="text-text-secondary">Version Control</p>
+                        </div>
+                    </div>
+                    <div class="skill-card p-6 rounded-xl border border-gray-800">
+                        <div class="text-center">
+                            <i class="fas fa-code text-4xl text-accent-purple mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">VS Code</h4>
+                            <p class="text-text-secondary">Development Environment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Work Experience</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item relative pl-8 pb-12">
+                    <div class="absolute left-0 top-2 w-4 h-4 bg-gradient-to-r from-accent to-accent-purple rounded-full animate-pulse-glow"></div>
+                    <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-8 card-hover border border-gray-800">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-2xl font-semibold text-accent">Full Stack Developer Intern</h3>
+                            <span class="text-text-secondary font-medium">Dec 2024 – Mar 2025</span>
+                        </div>
+                        <p class="text-accent-purple font-semibold mb-4">Salesine Technology Ltd, Bangalore</p>
+                        <ul class="space-y-3 text-text-secondary">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-success mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Built a comprehensive web application using <strong class="text-accent">NestJS</strong> for backend architecture and <strong class="text-accent-purple">Vue.js</strong> for responsive frontend development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-success mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Created robust RESTful APIs and implemented MVC architecture patterns using <strong class="text-accent">TypeScript</strong> for type-safe development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-success mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Utilized <strong class="text-accent">Vue Router</strong> and <strong class="text-accent-purple">Vuex</strong> for dynamic routing and centralized state management</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-success mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Integrated <strong class="text-success">GraphQL</strong> for efficient data fetching and implemented secure authentication flows</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-success mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Successfully deployed a responsive, production-ready application with optimized performance</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Featured Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-secondary/80 backdrop-blur-md rounded-2xl overflow-hidden card-hover border border-gray-800">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-semibold text-accent">Crowdsourced Decision-Making App</h3>
+                            <span class="text-text-secondary text-sm">Jan 2024 – Feb 2024</span>
+                        </div>
+                        <p class="text-text-secondary mb-6 leading-relaxed">
+                            A comprehensive web application featuring HTML/CSS/JavaScript frontend with robust Python & PHP backend integration. 
+                            Includes secure user authentication system and real-time live voting functionality for community-driven decisions.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm font-medium">HTML</span>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">CSS</span>
+                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm font-medium">JavaScript</span>
+                            <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">Python</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">PHP</span>
+                        </div>
+                        <a href="https://crowdchoice-1-2.onrender.com" target="_blank" 
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-secondary/80 backdrop-blur-md rounded-2xl overflow-hidden card-hover border border-gray-800">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-semibold text-accent">Chatbot-Flow</h3>
+                            <span class="text-text-secondary text-sm">Nov 2024 – Dec 2024</span>
+                        </div>
+                        <p class="text-text-secondary mb-6 leading-relaxed">
+                            Developed an interactive chatbot system with modern frontend technologies and robust backend integration. 
+                            Features seamless UI/UX flow design and advanced backend logic for dynamic conversational experiences.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm font-medium">HTML</span>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">CSS</span>
+                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm font-medium">JavaScript</span>
+                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-medium">React</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">PHP</span>
+                            <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">Python</span>
+                        </div>
+                        <a href="https://chatbot-flow-jsj6.onrender.com" target="_blank" 
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Education & Certifications</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <!-- Education -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 text-center text-accent">Academic Background</h3>
+                    <div class="space-y-6">
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-6 card-hover border border-gray-800">
+                            <h4 class="text-xl font-semibold text-accent-purple mb-2">Bachelor of Computer Applications (BCA)</h4>
+                            <p class="text-text-secondary mb-2">Jain Deemed-to-be University, Bangalore</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-text-secondary">Jul 2023 – Jun 2026</span>
+                                <span class="px-3 py-1 bg-success/20 text-success rounded-full text-sm font-bold">8.9 CGPA</span>
+                            </div>
+                        </div>
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-6 card-hover border border-gray-800">
+                            <h4 class="text-xl font-semibold text-accent-purple mb-2">Pre-University (Commerce)</h4>
+                            <p class="text-text-secondary mb-2">Vishwaprajna PU College, Mysore</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-text-secondary">Jun 2021 – Jun 2023</span>
+                                <span class="px-3 py-1 bg-success/20 text-success rounded-full text-sm font-bold">86%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 text-center text-accent">Professional Certifications</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 card-hover border border-gray-800 flex items-center">
+                            <i class="fab fa-python text-2xl text-accent mr-4"></i>
+                            <span class="font-semibold">Python Basics</span>
+                        </div>
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 card-hover border border-gray-800 flex items-center">
+                            <i class="fas fa-mobile-alt text-2xl text-accent-purple mr-4"></i>
+                            <span class="font-semibold">Mobile App Development</span>
+                        </div>
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 card-hover border border-gray-800 flex items-center">
+                            <i class="fas fa-database text-2xl text-success mr-4"></i>
+                            <span class="font-semibold">SQL</span>
+                        </div>
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 card-hover border border-gray-800 flex items-center">
+                            <i class="fab fa-git-alt text-2xl text-orange-500 mr-4"></i>
+                            <span class="font-semibold">Version Control</span>
+                        </div>
+                        <div class="bg-primary/50 backdrop-blur-md rounded-xl p-4 card-hover border border-gray-800 flex items-center">
+                            <i class="fas fa-chart-bar text-2xl text-blue-500 mr-4"></i>
+                            <span class="font-semibold">Data Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-8 text-center text-accent">Notable Achievements</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-primary/50 backdrop-blur-md rounded-xl p-6 text-center card-hover border border-gray-800">
+                        <div class="text-4xl mb-4 animate-float">🥋</div>
+                        <h4 class="text-xl font-semibold text-accent-purple mb-2">National-level Karate Player</h4>
+                        <p class="text-text-secondary">Represented at major competitions, showcasing discipline and leadership skills</p>
+                    </div>
+                    <div class="bg-primary/50 backdrop-blur-md rounded-xl p-6 text-center card-hover border border-gray-800">
+                        <div class="text-4xl mb-4 animate-float" style="animation-delay: 1s;">👨‍💼</div>
+                        <h4 class="text-xl font-semibold text-accent-purple mb-2">President, Commerce Club</h4>
+                        <p class="text-text-secondary">Organized events, seminars, and student-driven initiatives in Mysore</p>
+                    </div>
+                    <div class="bg-primary/50 backdrop-blur-md rounded-xl p-6 text-center card-hover border border-gray-800">
+                        <div class="text-4xl mb-4 animate-float" style="animation-delay: 2s;">🏆</div>
+                        <h4 class="text-xl font-semibold text-accent-purple mb-2">Cricket Team Captain</h4>
+                        <p class="text-text-secondary">Champions in Interschool competition 2022-23</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Get In Touch</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-purple mx-auto mb-6"></div>
+                <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+                    Ready to collaborate on exciting projects? Let's connect and create something amazing together!
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Contact Info -->
+                    <div class="space-y-6">
+                        <div class="bg-secondary/50 backdrop-blur-md rounded-xl p-6 card-hover border border-gray-800">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-purple rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Email</h4>
+                                    <p class="text-text-secondary">karthiksgowda28@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-secondary/50 backdrop-blur-md rounded-xl p-6 card-hover border border-gray-800">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-purple rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Phone</h4>
+                                    <p class="text-text-secondary">+91 80508 28798</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-secondary/50 backdrop-blur-md rounded-xl p-6 card-hover border border-gray-800">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-purple rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-text-primary">Location</h4>
+                                    <p class="text-text-secondary">Kengeri, Bangalore, 560060, India</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex flex-col justify-center">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-semibold mb-6 text-accent">Connect With Me</h3>
+                            <div class="flex justify-center space-x-6">
+                                <a href="https://linkedin.com/in/karthisg" target="_blank" 
+                                   class="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-xl">
+                                    <i class="fab fa-linkedin-in text-2xl text-white"></i>
+                                </a>
+                                <a href="https://github.com/Karthisgowda" target="_blank" 
+                                   class="w-16 h-16 bg-gradient-to-r from-gray-700 to-gray-800 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-xl">
+                                    <i class="fab fa-github text-2xl text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="mailto:karthiksgowda28@gmail.com" 
+                               class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-full hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-pulse-glow">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Message
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary">
+                    © 2024 Karthik S Gowda. Crafted with <span class="text-red-500">❤️</span> and lots of <span class="text-accent">code</span>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        (function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('#home');
+                if (parallax) {
+                    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Active navigation highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('text-accent');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('text-accent');
+                    }
+                });
+            });
+
+            // Typing animation for hero text (simple implementation)
+            const heroTitle = document.querySelector('h1 .gradient-text');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                setTimeout(typeWriter, 1000);
+            }
+
+            // Add loading animation
+            window.addEventListener('load', () => {
+                document.body.classList.add('loaded');
+            });
+
+        })();
+        
+        // TODO: Implement contact form submission logic
+        // TODO: Add project filtering functionality  
+        // TODO: Integrate with a CMS for dynamic content management
+        // TODO: Add blog section with API integration
+        // TODO: Implement theme switcher functionality
+    </script>
+</body>
+</html>
