@@ -7,7 +7,7 @@ const projects = [
     period: 'Jan 2024 – Feb 2024',
     description: 'A comprehensive web application featuring HTML/CSS/JavaScript frontend with robust Python & PHP backend integration. Includes secure user authentication system and real-time live voting functionality for community-driven decisions.',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Python', 'PHP'],
-    link: 'https://crowdchoice-1-2.onrender.com',
+    link: 'https://github.com/Karthisgowda/CrowdChoice-1.git',
     techColors: {
       HTML: 'bg-orange-500/20 text-orange-300',
       CSS: 'bg-blue-500/20 text-blue-300',
@@ -91,7 +91,7 @@ export function ProjectsSection() {
                   data-testid={`project-link-${index + 1}`}
                 >
                   <ExternalLink className="mr-2 w-4 h-4" />
-                  Live Demo
+                  View Code
                 </a>
               </div>
             </div>

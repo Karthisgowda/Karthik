@@ -4,6 +4,7 @@ import { Code, Database, GitBranch, Smartphone } from 'lucide-react';
 const languagesSkills = [
   { name: 'DSA', description: 'Data Structures & Algorithms', icon: Code },
   { name: 'Python', description: 'Backend Development & Scripting', icon: Code },
+  { name: 'PHP', description: 'Server-side Development', icon: Code },
   { name: 'Android Studio', description: 'Mobile App Development', icon: Smartphone },
 ];
 
@@ -39,7 +40,7 @@ export function SkillsSection() {
           <h3 className="text-2xl font-semibold mb-8 text-center text-text-primary">
             Languages & Core Technologies
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {languagesSkills.map((skill, index) => {
               const Icon = skill.icon;
               return (

@@ -17,11 +17,31 @@ const education = [
 ];
 
 const certifications = [
-  { name: 'Python Basics', icon: '🐍' },
-  { name: 'Mobile App Development', icon: '📱' },
-  { name: 'SQL', icon: '🗃️' },
-  { name: 'Version Control', icon: '🌿' },
-  { name: 'Data Analytics', icon: '📊' },
+  { 
+    name: 'Python Basics', 
+    icon: '🐍',
+    link: 'https://drive.google.com/file/d/1lydFufG8EefbBZD5lAJnFCM1H9QURWSS/view?usp=drive_link'
+  },
+  { 
+    name: 'Mobile App Development', 
+    icon: '📱',
+    link: 'https://drive.google.com/file/d/1LEgQ4cF2_CjOQzQhXqHC52GkbOCXxHNE/view?usp=drive_link'
+  },
+  { 
+    name: 'SQL', 
+    icon: '🗃️',
+    link: 'https://drive.google.com/file/d/1hrXJgn-QM2UPxhyjPeB3w_ENHm24v5Y6/view?usp=drive_link'
+  },
+  { 
+    name: 'Version Control', 
+    icon: '🌿',
+    link: 'https://drive.google.com/file/d/1MdIcjmwcZoLmVPHBNXzDIpW7N_e8aERJ/view?usp=drive_link'
+  },
+  { 
+    name: 'Data Analytics', 
+    icon: '📊',
+    link: 'https://drive.google.com/file/d/1Dy8q2ikaqh-RZrpzhDQpTBYaTrZTBYgj/view?usp=drive_link'
+  },
 ];
 
 const achievements = [
@@ -95,9 +115,12 @@ export function EducationSection() {
             <h3 className="text-2xl font-semibold mb-8 text-center text-accent">Professional Certifications</h3>
             <div className="grid grid-cols-1 gap-4">
               {certifications.map((cert, index) => (
-                <div 
+                <a
                   key={cert.name}
-                  className={`bg-background/50 backdrop-blur-md rounded-xl p-4 card-hover border border-border flex items-center ${
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`bg-background/50 backdrop-blur-md rounded-xl p-4 card-hover border border-border flex items-center hover:bg-accent/10 transition-all duration-300 cursor-pointer ${
                     isIntersecting 
                       ? 'animate-fade-in-right' 
                       : 'opacity-0'
@@ -106,8 +129,8 @@ export function EducationSection() {
                   data-testid={`certification-${cert.name.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   <span className="text-2xl mr-4">{cert.icon}</span>
-                  <span className="font-semibold">{cert.name}</span>
-                </div>
+                  <span className="font-semibold hover:text-accent transition-colors">{cert.name}</span>
+                </a>
               ))}
             </div>
           </div>
