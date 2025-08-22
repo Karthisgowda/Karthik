@@ -21,7 +21,8 @@ const projects = [
     period: 'Nov 2024 – Dec 2024',
     description: 'Developed an interactive chatbot system with modern frontend technologies and robust backend integration. Features seamless UI/UX flow design and advanced backend logic for dynamic conversational experiences.',
     technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'PHP', 'Python'],
-    link: 'https://chatbot-flow-jsj6.onrender.com',
+    link: 'https://github.com/Karthisgowda/chatbot-flow.git',
+    demoLink: 'https://chatbot-flow-jsj6.onrender.com',
     techColors: {
       HTML: 'bg-orange-500/20 text-orange-300',
       CSS: 'bg-blue-500/20 text-blue-300',
@@ -83,16 +84,30 @@ export function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  data-testid={`project-link-${index + 1}`}
-                >
-                  <ExternalLink className="mr-2 w-4 h-4" />
-                  View Code
-                </a>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent to-accent-purple text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    data-testid={`project-link-${index + 1}`}
+                  >
+                    <ExternalLink className="mr-2 w-4 h-4" />
+                    View Code
+                  </a>
+                  {project.demoLink && (
+                    <a
+                      href={project.demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      data-testid={`project-demo-${index + 1}`}
+                    >
+                      <ExternalLink className="mr-2 w-4 h-4" />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}

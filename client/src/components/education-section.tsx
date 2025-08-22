@@ -6,13 +6,13 @@ const education = [
     degree: 'Bachelor of Computer Applications (BCA)',
     institution: 'Jain Deemed-to-be University, Bangalore',
     period: 'Jul 2023 – Jun 2026',
-    grade: '8.9 CGPA',
+    grade: '8.58 CGPA',
   },
   {
     degree: 'Pre-University (Commerce)',
     institution: 'Vishwaprajna PU College, Mysore',
     period: 'Jun 2021 – Jun 2023',
-    grade: '86%',
+    grade: '81%',
   },
 ];
 
